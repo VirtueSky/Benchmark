@@ -171,8 +171,7 @@ public partial class Benchmark
         yield return Bench("VirtueSky.Linq Where+Aggregate",
             () =>
             {
-                var s = _data.Filter(static x => x >= 10)
-                    .Reduce(0, static (acc, x) => acc + (x - 10));
+                var s = _data.FilterReduce(static x => x >= 10, 0, static (acc, x) => acc + (x - 10));
                 _ = s;
             });
 
@@ -180,8 +179,7 @@ public partial class Benchmark
         yield return Bench("VirtueSky.Linq Where+Select -> Sum",
             () =>
             {
-                var s = _data.Filter(static x => (x & 1) == 0)
-                    .Map(static x => x * 2)
+                var s = _data.FilterMap(static x => (x & 1) == 0, static x => x * 2)
                     .Sum(x => (long)x);
                 _ = s;
             });
@@ -190,7 +188,7 @@ public partial class Benchmark
         yield return Bench("VirtueSky.Linq Where -> Sum",
             () =>
             {
-                var s = _data.Filter(static x => x > 10).Sum(x => (long)x);
+                var s = _data.FilterSum(static x => (long)x > 10);
                 _ = s;
             });
 
