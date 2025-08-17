@@ -188,7 +188,7 @@ public partial class Benchmark
         yield return Bench("VirtueSky.Linq Where -> Sum",
             () =>
             {
-                var s = _data.FilterSum(static x => (long)x > 10);
+                var s = _data.Filter(static x => (long)x > 10).Sum(x => (long)x);
                 _ = s;
             });
 
